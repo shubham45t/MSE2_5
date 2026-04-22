@@ -13,12 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Stop old containers
-        working-directory: /home/kali/Desktop/Shubham_MSE2/MSE2_4
-        run: docker-compose down || true
+      - name: Clean old containers
+        run: docker-compose down --remove-orphans || true
 
       - name: Build and start containers
-        working-directory: /home/kali/Desktop/Shubham_MSE2/MSE2_4
         run: docker-compose up -d --build
 
       - name: Show running containers
