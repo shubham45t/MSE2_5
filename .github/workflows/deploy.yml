@@ -1,0 +1,25 @@
+name: Deploy Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Stop old containers
+        working-directory: /home/kali/Desktop/Shubham_MSE2/MSE2_4
+        run: docker-compose down || true
+
+      - name: Build and start containers
+        working-directory: /home/kali/Desktop/Shubham_MSE2/MSE2_4
+        run: docker-compose up -d --build
+
+      - name: Show running containers
+        run: docker ps
